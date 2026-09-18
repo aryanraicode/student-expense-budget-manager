@@ -1,96 +1,234 @@
-# student-expense-budget-manager
-## Overview
-A Java command-line application designed to help students record daily expenses, manage monthly budgets, and analyze spending patterns. The application works offline using local file storage and the Java standard library. 
+# Student Expense & Budget Manager
 
-## Problem Statement
-Small purchases are easy to forget. Students need a simple way to see where their money goes and whether a month's spending exceeds their budget. See [statement.md](statement.md).
+## VITyarthi - Build Your Own Project
+**CSE1021 | Java Course Project**
 
-## Features
-- Add, list, search, and delete expenses with validated inputs.
-- Set a separate budget for each month and display overspending warnings.
-- Monthly category totals, count, highest/lowest expense, and remaining budget.
-- Automatic local file creation and persistence after each successful change.
+Student Expense & Budget Manager is an offline Java command-line application for recording daily expenses, managing monthly budgets and reviewing spending.
 
-## Technologies Used
-Java standard library, JDK command-line tools, Git, Markdown, and Mermaid diagrams. No external runtime dependencies, database, IDE, or network connection is needed to run the app.
+### Features
 
-## Java Concepts Used
-Classes/objects and constructors: `Expense` and managers. Encapsulation: private fields and getters. `ArrayList` and collections: expenses, sorting comparisons, maps and sets. Packages: `model`, `service`, `storage`, `util`. File handling: `Files` and `Path`. Exception handling: validation and I/O errors. Loops, conditionals, methods, and `Scanner`: the menu. `BigDecimal` keeps currency exact; `LocalDate` and `YearMonth` validate dates and select months. Small lambdas support searching, deletion, and comparisons.
+- Add expenses
+- View all expenses
+- Search expenses
+- Delete expenses
+- Set monthly budgets
+- View monthly budget information
+- Generate monthly spending reports
+- Detect overspending
+- Preserve data between sessions
+- Validate user input
+- Store data locally using UTF-8 files
+
+### Technology
+
+- Java 11 or newer
+- Java Standard Library
+- Command-line interface
+- Local file storage
+- `BigDecimal` for currency
+- `LocalDate` and `YearMonth` for dates
 
 ## Project Structure
+
 ```text
 student-expense-budget-manager/
-  README.md
-  statement.md
-  .gitignore
-  src/
-    Main.java
-    model/Expense.java
-    service/ExpenseManager.java
-    service/BudgetManager.java
-    service/ReportManager.java
-    storage/FileManager.java
-    util/InputValidator.java
-  tests/TestRunner.java
-  data/.gitkeep
-  docs/
-    architecture.md
-    diagrams.md
-    study-guide.md
-    submission.md
-    verification.md
-    cli-session.txt
+│
+├── src/
+│   ├── Main.java
+│   ├── model/
+│   │   └── Expense.java
+│   ├── service/
+│   │   ├── ExpenseManager.java
+│   │   ├── BudgetManager.java
+│   │   └── ReportManager.java
+│   ├── storage/
+│   │   └── FileManager.java
+│   └── util/
+│       └── InputValidator.java
+│
+├── tests/
+│   └── TestRunner.java
+│
+├── docs/
+│   ├── architecture.md
+│   ├── diagrams.md
+│   ├── study-guide.md
+│   ├── submission.md
+│   ├── verification.md
+│   └── cli-session.txt
+│
+├── data/
+│   └── .gitkeep
+│
+├── statement.md
+├── .gitignore
+└── README.md
 ```
-`data/expenses.csv` and `data/budget.txt` are created on first execution and excluded from Git to avoid publishing personal expense records.
 
 ## Requirements
-JDK 11 or newer (a JRE alone is insufficient). Ensure `java` and `javac` are on PATH. Check both with `java -version` and `javac -version`. Commands below work in PowerShell, Windows Command Prompt, and ordinary Unix shells.
 
-## Installation
-Download/extract the project, then open a terminal in its root folder. If it has been published to the intended account, alternatively run:
-```sh
-git clone https://github.com/sancharika25bai10963-creator/student-expense-budget-manager.git
-cd student-expense-budget-manager
+Install **JDK 11 or newer**.
+
+Check the installation:
+
+```bash
+java -version
+javac -version
 ```
-That URL is the intended destination, not a claim that a public repository exists. No dependency installation or configuration is required beyond the JDK.
 
-## Compilation
-From the project root:
-```sh
+Both commands must work from the terminal.
+
+## How to Run
+
+Open a terminal in the project root.
+
+### 1. Compile the application
+
+```bash
 javac -d out src/model/*.java src/service/*.java src/storage/*.java src/util/*.java src/Main.java
 ```
 
-## Running the Project
-```sh
+### 2. Run the application
+
+```bash
 java -cp out Main
 ```
-Keep the working directory at the project root to reuse the same `data` directory. Optionally select another data folder: `java -cp out Main demo-data`. Use only one running application per data directory.
 
-## Example Usage
-Choose `5`, enter `2026-09`, then `1000` to set the September budget. Choose `1` and enter `2026-09-17`, `Food`, `Lunch`, and `125.50`. Choose `7` and enter `2026-09` to see the report. For this illustrative single-record scenario the remaining budget is Rs. 874.50. Entering a blank month selects the current system month. Choose `8` to exit.
+### 3. Use a separate data directory
 
-Search is case insensitive across descriptions and categories, substring-based for dates, and exact for ID text. Results match any of these fields. All expenses are listed in insertion order. Deletion takes a numeric ID. Invalid entry cancels that operation and returns to the menu; enter the operation again to retry. End-of-input exits cleanly.
+```bash
+java -cp out Main demo-data
+```
 
-## Testing
-Compile the app first, then:
-```sh
+The default data directory is `data`.
+
+Only one running application instance should use a given data directory at a time.
+
+## How to Run Tests
+
+First compile the application:
+
+```bash
+javac -d out src/model/*.java src/service/*.java src/storage/*.java src/util/*.java src/Main.java
+```
+
+Then compile the test runner:
+
+```bash
 javac -cp out -d out tests/TestRunner.java
+```
+
+Run:
+
+```bash
 java -cp out TestRunner
 ```
-The runner creates an isolated temporary directory and deletes only its own test data. It throws an error and exits unsuccessfully if any check fails. It tests expense operations, exact money arithmetic, month filtering, budgets, reports, input validation, persistence, malformed files, and failed writes. See [verification.md](docs/verification.md) for actual execution evidence and menu checks.
 
-## Functional Requirements
-1. Expense management: store ID, date, category, description, amount; add/view/search/delete.
-2. Budget management: set/view monthly budgets, calculate spending and remaining balance, warn on overspending.
-3. Reporting: monthly totals, category totals, highest/lowest expense, count, and remaining budget.
+The test runner uses an isolated temporary directory and removes its test data when it finishes.
 
-## Non-Functional Requirements
-- Usability: numbered menu, named categories, clear formats and error messages.
-- Reliability: validate before saving; recover from invalid input; preserve malformed source files for repair.
-- Maintainability: seven production classes with separate CLI, business logic, storage, and validation responsibilities.
-- Performance: linear searches and totals for ordinary student records; each mutation rewrites its file. No large-scale performance claim is made.
-- Persistence: UTF-8 files saved after each successful change; temporary-file replacement reduces partial-write risk.
-- Privacy: offline storage; personal data excluded from Git. Files are not encrypted.
+## Menu
 
-## Future Improvements
-Edit existing expenses, export reports, recurring expenses, configurable categories, and import/export with a full CSV library if multiline fields become necessary. See [architecture.md](docs/architecture.md) for current limits and [study-guide.md](docs/study-guide.md) for explanations.
+```text
+1. Add expense
+2. View expenses
+3. Search expenses
+4. Delete expense
+5. Set monthly budget
+6. View monthly budget
+7. View monthly report
+8. Exit
+```
+
+## Expense Fields
+
+Each expense contains:
+
+- ID
+- Date
+- Category
+- Description
+- Amount
+
+## Budget
+
+A separate budget can be stored for each month.
+
+Example:
+
+```text
+Month: 2026-09
+Budget: Rs. 1000.00
+```
+
+## Example
+
+Set a budget:
+
+```text
+Choose 5
+Month: 2026-09
+Budget: 1000
+```
+
+Add an expense:
+
+```text
+Choose 1
+Date: 2026-09-17
+Category: Food
+Description: Lunch
+Amount: 125.50
+```
+
+View the report:
+
+```text
+Choose 7
+Month: 2026-09
+```
+
+Expected remaining budget:
+
+```text
+Rs. 1000.00 - Rs. 125.50 = Rs. 874.50
+```
+
+## Data Storage
+
+The application creates:
+
+```text
+data/expenses.csv
+data/budget.txt
+```
+
+The files are UTF-8 text files and are written after successful changes.
+
+Runtime personal data should not be committed to Git. The `.gitignore` file therefore ignores the contents of the `data` directory while keeping `data/.gitkeep`.
+
+## Design
+
+The application separates:
+
+- CLI interaction in `Main`
+- Expense business logic in `ExpenseManager`
+- Budget logic in `BudgetManager`
+- Reporting logic in `ReportManager`
+- Persistence in `FileManager`
+- Validation in `InputValidator`
+- Expense data representation in `Expense`
+
+## Limitations / Future Enhancements
+
+Possible future enhancements include:
+
+- Editing existing expenses
+- Exporting reports
+- Recurring expenses
+- Configurable categories
+- Full CSV-library import/export for multiline fields
+- Additional reporting features
+
+## Important Note
+
+This repository is a project-ready reconstruction based on the supplied Student Expense & Budget Manager project report. The report states that the original source code was not supplied as evidence, so undocumented source-level method signatures, exact serialization details and exact internal call order are not claimed.

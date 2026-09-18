@@ -75,4 +75,3 @@ Data is stored locally and runtime personal data is excluded from Git.
 The target user is a student operating a local command-line application.
 
 Editing expenses is outside the current implemented scope and is treated as a future enhancement.
-
