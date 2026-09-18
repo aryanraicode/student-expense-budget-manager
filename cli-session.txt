@@ -1,0 +1,69 @@
+Sample CLI session
+
+======================================
+   STUDENT EXPENSE & BUDGET MANAGER
+======================================
+
+----------- MENU -----------
+1. Add expense
+2. View expenses
+3. Search expenses
+4. Delete expense
+5. Set monthly budget
+6. View monthly budget
+7. View monthly report
+8. Exit
+Choose an option: 5
+
+--- Set Monthly Budget ---
+Month (YYYY-MM, blank for current month): 2026-09
+Budget amount: 1000
+Budget saved for 2026-09.
+
+----------- MENU -----------
+1. Add expense
+2. View expenses
+3. Search expenses
+4. Delete expense
+5. Set monthly budget
+6. View monthly budget
+7. View monthly report
+8. Exit
+Choose an option: 1
+
+--- Add Expense ---
+Date (YYYY-MM-DD): 2026-09-17
+Category: Food
+Description: Lunch
+Amount: 125.50
+Expense added successfully.
+ID: 1 | Date: 2026-09-17 | Category: Food | Description: Lunch | Amount: Rs. 125.50
+
+----------- MENU -----------
+1. Add expense
+2. View expenses
+3. Search expenses
+4. Delete expense
+5. Set monthly budget
+6. View monthly budget
+7. View monthly report
+8. Exit
+Choose an option: 7
+
+Month (YYYY-MM, blank for current month): 2026-09
+
+===== MONTHLY REPORT =====
+Month: 2026-09
+Expense count: 1
+Monthly total: Rs. 125.50
+
+Category totals:
+- Food: Rs. 125.50
+
+Highest expense: Lunch (Rs. 125.50)
+Lowest expense: Lunch (Rs. 125.50)
+
+Budget: Rs. 1000
+Remaining budget: Rs. 874.50
+Status: Within budget
+==========================
